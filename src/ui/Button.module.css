@@ -1,0 +1,248 @@
+/* Figma Design System: Buttons (node 282:147) */
+
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.button:disabled,
+.button[aria-disabled="true"]:not([data-loading]) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.button[data-loading] {
+  pointer-events: none;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Sizes */
+
+.sizeDefault {
+  min-height: 36px;
+  padding: var(--space-1-5) var(--space-3);
+  border-radius: var(--radius-lg);
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+}
+
+.sizeSmall {
+  min-height: 28px;
+  padding: var(--space-1) var(--space-2-5);
+  border-radius: var(--radius-md);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+}
+
+.iconOnly.sizeDefault {
+  width: 36px;
+  height: 36px;
+  padding: var(--space-2);
+}
+
+.iconOnly.sizeSmall {
+  width: 28px;
+  height: 28px;
+  padding: var(--space-1-5);
+}
+
+/* Variants */
+
+.primary {
+  background: var(--inverse-low);
+  color: var(--text-inverse);
+  border-color: var(--border-inverse-strong);
+  box-shadow: var(--shadow-md);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primary:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--inverse-medium);
+  }
+}
+
+.primary:not(:disabled):not([aria-disabled="true"]):active {
+  background: var(--inverse-high);
+  box-shadow: none;
+}
+
+.secondary {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .secondary:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--surface);
+  }
+}
+
+.secondary:not(:disabled):not([aria-disabled="true"]):active {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+.accent {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .accent:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--accent-hover);
+  }
+}
+
+.accent:not(:disabled):not([aria-disabled="true"]):active {
+  background: var(--accent-strong);
+  box-shadow: none;
+}
+
+.destructive {
+  background: var(--danger);
+  color: var(--text-inverse);
+  border-color: var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .destructive:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--danger-hover);
+  }
+}
+
+.destructive:not(:disabled):not([aria-disabled="true"]):active {
+  background: var(--danger-strong);
+  box-shadow: none;
+}
+
+/* Ghost variants */
+
+.ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ghost:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--fill);
+  }
+}
+
+.ghost:not(:disabled):not([aria-disabled="true"]):active {
+  background: var(--fill-2);
+}
+
+.secondaryGhost {
+  background: transparent;
+  color: var(--text-2);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .secondaryGhost:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--fill);
+    color: var(--text);
+  }
+}
+
+.secondaryGhost:not(:disabled):not([aria-disabled="true"]):active {
+  background: var(--fill-2);
+}
+
+.accentGhost {
+  background: transparent;
+  color: var(--accent);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .accentGhost:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--fill);
+    color: var(--accent-text-strong);
+  }
+}
+
+.accentGhost:not(:disabled):not([aria-disabled="true"]):active {
+  background: var(--fill-2);
+}
+
+.destructiveGhost {
+  background: transparent;
+  color: var(--danger-text);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .destructiveGhost:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--danger-soft);
+  }
+}
+
+.destructiveGhost:not(:disabled):not([aria-disabled="true"]):active {
+  background: color-mix(in srgb, var(--danger) 18%, transparent);
+}
+
+/* Loading state */
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+}
+
+.button[data-loading] .content {
+  opacity: 0;
+}
+
+.spinner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  border: 2px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-top-color: currentColor;
+  animation: btn-spin 0.7s linear infinite;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

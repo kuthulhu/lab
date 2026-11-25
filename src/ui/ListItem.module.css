@@ -1,0 +1,85 @@
+/* Figma Design System: List Item (node 424:737) */
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--text);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  text-align: left;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive:hover {
+    background: var(--surface);
+  }
+}
+
+.interactive:active {
+  background: var(--surface-2);
+}
+
+.interactive:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.item[data-active] {
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.item[data-muted] {
+  color: var(--text-3);
+}
+
+.lead {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.description {
+  font: var(--weight-regular) var(--text-body-xs) var(--font-sans);
+  color: var(--text-2);
+}
+
+.info {
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+.trail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: currentColor;
+}

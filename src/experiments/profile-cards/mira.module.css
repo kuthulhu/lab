@@ -1,0 +1,432 @@
+/* Reserves the expanded height so expanding/collapsing never shifts adjacent cards or flickers hover. */
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  max-width: 100%;
+  min-height: 394px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-lg);
+  overflow: clip;
+  isolation: isolate;
+}
+
+.mediaWrap {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  padding: var(--space-1);
+}
+
+.mediaFrame {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  overflow: clip;
+  box-shadow:
+    0 4px 6px rgb(0 0 0 / 0.1),
+    0 10px 15px rgb(0 0 0 / 0.1);
+  transition: height 560ms var(--ease-drawer);
+}
+
+/* Inset stroke so the image reaches the exact outer pixel with zero 1px white bottom seam. */
+.mediaFrame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--border);
+  pointer-events: none;
+}
+
+.card[data-expanded] .mediaFrame,
+.card:focus-within .mediaFrame {
+  height: 268px;
+}
+
+.landscapePos {
+  position: absolute;
+  left: -65px;
+  top: -23px;
+  width: 536px;
+  height: 300px;
+  pointer-events: none;
+}
+
+.portraitPos {
+  position: absolute;
+  left: 50%;
+  top: -44px;
+  width: 326px;
+  height: 355px;
+  transform: translateX(-50%) translateY(8px);
+  pointer-events: none;
+  transition: transform 560ms var(--ease-drawer);
+}
+
+.card[data-expanded] .portraitPos,
+.card:focus-within .portraitPos {
+  transform: translateX(-50%) translateY(0);
+}
+
+.coverImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 240ms ease-out;
+}
+
+.coverImg[data-loaded] {
+  opacity: 1;
+}
+
+.fillImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* Collapsed overlay scrim & white title (Figma 568:2394) */
+.collapsedScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgb(0 0 0 / 0.4);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 460ms ease;
+}
+
+.card[data-expanded] .collapsedScrim,
+.card:focus-within .collapsedScrim {
+  opacity: 0;
+}
+
+.collapsedTitle {
+  position: absolute;
+  left: 12px;
+  top: 40px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+  transition:
+    opacity 360ms ease 140ms,
+    transform 460ms var(--ease-drawer) 100ms,
+    filter 360ms ease 140ms;
+}
+
+.card[data-expanded] .collapsedTitle,
+.card:focus-within .collapsedTitle {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(4px);
+  transition:
+    opacity 340ms ease 0ms,
+    transform 440ms var(--ease-drawer) 0ms,
+    filter 340ms ease 0ms;
+}
+
+.collapsedName {
+  font: var(--weight-semibold) var(--text-h1) var(--font-heading);
+  letter-spacing: var(--tracking-h1);
+  color: #fafafa;
+  white-space: nowrap;
+}
+
+/* Expandable lower content area */
+.contentCollapse {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-rows: 0fr;
+  width: 100%;
+  transition: grid-template-rows 560ms var(--ease-drawer);
+}
+
+.card[data-expanded] .contentCollapse,
+.card:focus-within .contentCollapse {
+  grid-template-rows: 1fr;
+}
+
+.contentInner {
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 260ms ease 0ms,
+    transform 420ms var(--ease-drawer) 0ms;
+}
+
+.card[data-expanded] .content,
+.card:focus-within .content {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 380ms ease 90ms,
+    transform 480ms var(--ease-drawer) 60ms;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.nameRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: -2px;
+}
+
+.name {
+  margin: 0;
+  font: var(--weight-semibold) var(--text-h1) var(--font-heading);
+  letter-spacing: var(--tracking-h1);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.verifiedIcon {
+  position: relative;
+  top: 1px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.role {
+  margin: 0;
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  color: var(--text-2);
+}
+
+.footerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--space-2);
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.statItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+}
+
+.statIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  color: var(--text-2);
+}
+
+.statValue {
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+/* Figma chip (451:722): Default & Selected states */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: var(--space-1) var(--space-1-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip:hover {
+    background: var(--surface);
+  }
+}
+
+.chip:active {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+.chip:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--accent-subtle);
+  border-color: var(--border-accent-strong);
+  color: var(--accent-text-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip[aria-pressed="true"]:hover {
+    background: var(--accent-soft);
+  }
+}
+
+.chip[aria-pressed="true"]:active {
+  background: var(--accent-soft);
+  box-shadow: none;
+}
+
+.chip[aria-pressed="true"]:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chipIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.chipLabel {
+  padding-inline: var(--space-1-5);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  white-space: nowrap;
+}
+
+.noiseMask {
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  z-index: 3;
+  width: 320px;
+  height: 387.692px;
+  transform: translateX(-50%);
+  background-image: url("/profile-cards/mira-noise.webp");
+  background-size: 512px 512px;
+  background-position: top left;
+  opacity: 0.1;
+  pointer-events: none;
+  mask-image: url("/profile-cards/mira-noise-mask.svg");
+  mask-repeat: no-repeat;
+  mask-size: 320px 112px;
+  mask-position: 0px 275.692px;
+  mask-mode: alpha;
+  -webkit-mask-image: url("/profile-cards/mira-noise-mask.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 320px 112px;
+  -webkit-mask-position: 0px 275.692px;
+}
+
+.glowOneWrap {
+  position: absolute;
+  left: -462px;
+  top: -488px;
+  z-index: 2;
+  width: 674px;
+  height: 674px;
+  pointer-events: none;
+}
+
+.glowOneInner {
+  position: absolute;
+  inset: -9.5%;
+}
+
+.glowTwoWrap {
+  position: absolute;
+  left: -346px;
+  top: 50%;
+  z-index: 1;
+  width: 390px;
+  height: 390px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.glowTwoInner {
+  position: absolute;
+  inset: -16.41%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediaFrame,
+  .portraitPos,
+  .collapsedScrim,
+  .collapsedTitle,
+  .card[data-expanded] .collapsedTitle,
+  .card:focus-within .collapsedTitle,
+  .contentCollapse,
+  .content,
+  .card[data-expanded] .content,
+  .card:focus-within .content {
+    transition-duration: 160ms;
+    transition-delay: 0ms;
+    transition-timing-function: ease;
+  }
+
+  .portraitPos,
+  .collapsedTitle,
+  .card[data-expanded] .collapsedTitle,
+  .card:focus-within .collapsedTitle,
+  .content {
+    transform: none;
+    filter: none;
+  }
+
+  .portraitPos {
+    transform: translateX(-50%);
+  }
+}

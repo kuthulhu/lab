@@ -1,0 +1,161 @@
+/* Figma Design System: AlertDialog / Modal (nodes 453:710 & 504:4150) */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgb(14 14 15 / 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  max-height: 82vh;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform-origin: center;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 220ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.card[data-size="small"] {
+  max-width: 298px;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+.content[data-size="small"]:not([data-type="simple"]) {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-4);
+  gap: var(--space-3);
+}
+
+.content[data-type="simple"] {
+  gap: 0;
+}
+
+.iconBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.iconBox[data-size="small"] {
+  width: 36px;
+  height: 36px;
+}
+
+.iconBox[data-type="destructive"] {
+  background: var(--danger-soft);
+  border-color: transparent;
+  color: var(--danger-text);
+}
+
+.copyCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+  min-width: 0;
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+  font: var(--weight-semibold) var(--text-h4) var(--font-heading);
+  letter-spacing: var(--tracking-h4);
+  color: var(--text);
+}
+
+.desc {
+  margin: 0;
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  color: var(--text-2);
+}
+
+.scrollBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-height: 300px;
+  margin-top: var(--space-2);
+  padding-right: var(--space-1);
+  overflow-y: auto;
+  text-align: left;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.footer[data-size="small"] {
+  flex-direction: column-reverse;
+  padding: var(--space-3) var(--space-4);
+}
+
+.footer[data-size="small"] > * {
+  width: 100%;
+}
+
+.footer[data-type="simple"] {
+  justify-content: flex-start;
+  gap: var(--space-3);
+  padding: 0 var(--space-4) var(--space-4);
+  border-top: 0;
+  background: transparent;
+}
+
+.footer[data-size="small"][data-type="simple"] {
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0 var(--space-4) var(--space-2-5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transform: none;
+    transition: opacity 160ms ease;
+
+    @starting-style {
+      opacity: 0;
+      transform: none;
+    }
+  }
+}

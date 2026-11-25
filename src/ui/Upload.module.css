@@ -1,0 +1,335 @@
+/* Figma Design System: File Upload Dropzone & Attachment (nodes 523:1396 & 522:1651) */
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+  width: 100%;
+}
+
+/* Dropzone (Figma 523:1396) */
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  text-align: center;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.dropzone[data-size="compact"] {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+}
+
+.dropzone[data-size="compact"] .dropText {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dropzone:hover:not([data-disabled]):not([data-dragging]) {
+    background: var(--surface);
+  }
+}
+
+.dropzone:focus-within:not([data-disabled]) {
+  border-style: solid;
+  border-color: transparent;
+  box-shadow: var(--focus-ring);
+}
+
+.dropzone[data-dragging] {
+  border-color: var(--border-accent);
+  background: var(--accent-subtle);
+}
+
+.dropzone[data-invalid] {
+  border-color: var(--danger);
+  background: var(--bg);
+}
+
+.dropzone[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.dropIconBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  flex-shrink: 0;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.dropIconBox[data-size="compact"] {
+  width: 36px;
+  height: 36px;
+}
+
+.dropIconBox[data-dragging] {
+  border-color: var(--border-accent);
+  background: var(--bg);
+  color: var(--accent);
+}
+
+.dropIconBox[data-invalid] {
+  border-color: transparent;
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.dropText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+}
+
+.dropPrompt {
+  margin: 0;
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  color: var(--text);
+}
+
+.dropPrompt[data-dragging] {
+  color: var(--accent);
+}
+
+.dropMeta {
+  margin: 0;
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  color: var(--text-2);
+}
+
+/* Attachment (Figma 522:1651) */
+
+.attachment {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2-5) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.attachment[data-size="small"] {
+  padding: var(--space-2) var(--space-2-5);
+}
+
+.attachment[data-size="xs"] {
+  padding: var(--space-1-5) var(--space-2);
+}
+
+.attachment[data-orientation="vertical"] {
+  padding: var(--space-2-5);
+}
+
+.attachment[data-orientation="vertical"][data-size="small"],
+.attachment[data-orientation="vertical"][data-size="xs"] {
+  padding: var(--space-2);
+}
+
+.attachment[data-state="error"] {
+  border-color: var(--danger);
+  background: var(--bg);
+}
+
+.attachmentBody {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2-5);
+  width: 100%;
+  min-width: 0;
+}
+
+.attachment[data-size="small"] .attachmentBody,
+.attachment[data-size="xs"] .attachmentBody {
+  gap: var(--space-2);
+}
+
+.attachmentMedia {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text-2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.attachmentMedia[data-size="small"] {
+  width: 32px;
+  height: 32px;
+}
+
+.attachmentMedia[data-size="xs"] {
+  width: 24px;
+  height: 24px;
+}
+
+.attachmentMedia[data-orientation="vertical"] {
+  width: 100%;
+  height: 96px;
+}
+
+.attachmentMedia[data-orientation="vertical"][data-size="small"] {
+  height: 80px;
+}
+
+.attachmentMedia[data-orientation="vertical"][data-size="xs"] {
+  height: 64px;
+}
+
+.attachmentMedia[data-state="error"] {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.attachmentThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.attachmentContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.attachmentName {
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment[data-size="xs"] .attachmentName {
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+}
+
+.attachmentInfo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  color: var(--text-2);
+}
+
+.attachmentInfo[data-state="error"] {
+  color: var(--danger-text);
+}
+
+.attachmentSpinner {
+  color: var(--accent);
+  animation: upload-spin 800ms linear infinite;
+  flex-shrink: 0;
+}
+
+.attachmentErrorIcon {
+  color: var(--danger);
+  flex-shrink: 0;
+}
+
+.attachmentActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.attachmentDoneIcon {
+  color: var(--text);
+}
+
+.attachmentIconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .attachmentIconBtn:hover {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+}
+
+.progressTrack {
+  width: 100%;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  transition: width 220ms var(--ease-out);
+}
+
+@keyframes upload-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropzone,
+  .dropIconBox,
+  .attachmentIconBtn,
+  .progressFill {
+    transition: none;
+  }
+
+  .attachmentSpinner {
+    animation-duration: 2s;
+  }
+}

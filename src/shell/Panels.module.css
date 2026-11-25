@@ -1,0 +1,307 @@
+.empty {
+  margin: 24px 0;
+  color: var(--text-3);
+}
+
+/* Code */
+
+.fileBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.files {
+  display: flex;
+  gap: 16px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.files::-webkit-scrollbar {
+  display: none;
+}
+
+.file,
+.copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: color 150ms;
+}
+
+.file {
+  font: var(--weight-regular) var(--text-body-sm) var(--font-mono);
+}
+
+.file[aria-pressed="true"] {
+  color: var(--text);
+}
+
+.copy {
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .file:hover,
+  .copy:hover {
+    color: var(--text);
+  }
+}
+
+.copy[data-copied] {
+  color: var(--success);
+}
+
+.lineCount {
+  margin-left: auto;
+  flex-shrink: 0;
+  font: var(--weight-regular) var(--text-body-xs) var(--font-mono);
+  color: var(--text-3);
+}
+
+.source {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+}
+
+.source :global(pre.shiki) {
+  margin: 0;
+  padding: 20px 0;
+  min-width: max-content;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  tab-size: 2;
+  counter-reset: line;
+  background: transparent !important;
+  opacity: 1;
+  transition: opacity 160ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+/* Code skeleton shown while Shiki grammars load or tokenize a large file */
+
+.skeletonPill {
+  display: inline-block;
+  height: 14px;
+  margin: 7px 0;
+  border-radius: var(--radius-sm);
+  background: var(--fill);
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+.skeletonSource {
+  padding: 20px 24px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.skeletonRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 13px;
+}
+
+.skeletonNum {
+  width: 22px;
+  height: 10px;
+  border-radius: var(--radius-xs);
+  background: var(--fill);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.skeletonLine {
+  height: 11px;
+  border-radius: var(--radius-xs);
+  background: var(--fill);
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonPill,
+  .skeletonLine {
+    animation: none;
+  }
+}
+
+.source :global(pre.shiki:focus-visible) {
+  outline-offset: -2px;
+  border-radius: var(--radius-2xl);
+}
+
+.source :global(.line) {
+  padding-right: 24px;
+}
+
+.source :global(.line)::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 3.5em;
+  padding-right: 1.5em;
+  text-align: right;
+  color: var(--text-3);
+  opacity: 0.7;
+  user-select: none;
+}
+
+.source :global(.shiki span) {
+  color: var(--shiki-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .source :global(.shiki span) {
+    color: var(--shiki-dark);
+  }
+}
+
+:root[data-theme="dark"] .source :global(.shiki span) {
+  color: var(--shiki-dark);
+}
+
+/* Notes: long-form text at the portfolio's body size, in the same 640px measure as its About tab. */
+
+.notes {
+  max-width: 640px;
+  padding-top: 8px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 40px;
+  margin: 0 0 40px;
+}
+
+.meta dt {
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  color: var(--text-3);
+}
+
+.meta dd {
+  margin: 0;
+}
+
+.prose {
+  color: var(--text);
+}
+
+.prose :where(h2, h3) {
+  margin: 40px 0 8px;
+  font: var(--weight-semibold) var(--text-h3) var(--font-heading);
+  letter-spacing: var(--tracking-h3);
+}
+
+.prose :where(h2:first-child, h3:first-child) {
+  margin-top: 0;
+}
+
+.prose :where(p, ul, ol) {
+  margin: 0 0 16px;
+}
+
+.prose :where(ul, ol) {
+  padding-left: 1.25em;
+}
+
+.prose li + li {
+  margin-top: 6px;
+}
+
+.prose li::marker {
+  color: var(--text-3);
+}
+
+.prose strong {
+  font-weight: 500;
+}
+
+.prose code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+.prose a {
+  text-decoration-line: underline;
+  text-decoration-color: var(--border);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .prose a:hover {
+    text-decoration-color: var(--accent);
+  }
+}
+
+/* Playground */
+
+.playground {
+  display: flex;
+  flex-direction: column;
+  height: clamp(560px, 78dvh, 960px);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+}
+
+.playground > :global(.sp-wrapper) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sandpackLayout {
+  flex: 1;
+  min-height: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.sandpackPane {
+  height: 100% !important;
+}
+
+@media (max-width: 860px) {
+  .sandpackLayout {
+    flex-direction: column;
+    flex-wrap: nowrap !important;
+  }
+  .sandpackPane {
+    height: auto !important;
+    flex: 1 1 50% !important;
+    min-height: 0;
+  }
+}

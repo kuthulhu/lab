@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 56px 64px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.slot {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@container (max-width: 440px) {
+  .slot {
+    width: 100%;
+  }
+}

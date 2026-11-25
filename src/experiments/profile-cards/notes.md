@@ -1,0 +1,7 @@
+## Three profile card studies
+
+Each card translates its corresponding frame from the Labs Figma file using shared design tokens in `tokens.css`, Phosphor icons, and local static assets under `public/profile-cards/`.
+
+- **Mira Okafor (`320 × 130` → `320 × 394`)**: Rests in the compact Figma collapsed state with a darkened portrait banner and white overlay title; hovering (or tapping on touch / focusing via keyboard) smoothly expands the image window, fades the scrim, and reveals the role, stats, and interactive `chip`.
+- **Jonas Lindqvist (`300 × 356`)**: Full-bleed cutout portrait over a sky-blue backdrop and radial aura, softened into the bottom blue gradient scrim via an alpha SVG mask (`jonas-mask.svg`). On mouse hover, a `requestAnimationFrame` lerp tilts the card in 3D while revealing the staggered Dribbble icon grid (`jonas-dribbble.svg`) masked with a cursor-tracking holographic foil, specular glare, and ambient behind-card glow.
+- **Aiko Tanaka (`384 × 404`)**: Landscape meadow banner with an overlapping `312 × 241` floating sheet, overlapping circular avatar, secondary/primary action buttons, and three equal stat tiles. Hovering the card ripples a DPR-scaled HTML5 canvas pixel grid outward from the pointer entry point with a cursor-following shimmer, and turns the circular avatar into a crystalized glass orb with crackling violet electric rim arcs and cursor-swirling glowing dust particles.

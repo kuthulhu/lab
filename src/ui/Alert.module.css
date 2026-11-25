@@ -1,0 +1,95 @@
+/* Figma Design System: Alert (node 453:811) */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--bg);
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.content {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  color: var(--text);
+}
+
+.description {
+  margin: 0;
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  color: var(--text-2);
+}
+
+/* Status variants */
+
+.neutral .iconWrap {
+  color: var(--text);
+}
+
+.info {
+  background: var(--info-soft);
+}
+.info .iconWrap {
+  color: var(--info-strong);
+}
+.info .title {
+  color: var(--info-text-strong);
+}
+
+.success {
+  background: var(--success-soft);
+}
+.success .iconWrap {
+  color: var(--success-strong);
+}
+.success .title {
+  color: var(--success-text-strong);
+}
+
+.warning {
+  background: var(--warning-soft);
+}
+.warning .iconWrap {
+  color: var(--warning-strong);
+}
+.warning .title {
+  color: var(--warning-text-strong);
+}
+
+.danger {
+  background: var(--danger-soft);
+}
+.danger .iconWrap {
+  color: var(--danger-strong);
+}
+.danger .title {
+  color: var(--danger-text-strong);
+}
+
+.destructive {
+  background: var(--bg);
+}
+.destructive .iconWrap,
+.destructive .title,
+.destructive .description {
+  color: var(--danger-text);
+}

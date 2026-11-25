@@ -1,0 +1,205 @@
+/* Figma Design System: Text Field, Text Area & Required Tooltip (nodes 309:1480, 336:660, 302:1297) */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.label {
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  color: var(--text-2);
+}
+
+.label[data-invalid] {
+  color: var(--danger-text);
+}
+
+.optional {
+  color: var(--text-3);
+  font-weight: var(--weight-regular);
+}
+
+/* Required tooltip badge */
+
+.requiredDot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  color: var(--text-2);
+  cursor: default;
+}
+
+.requiredTooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  transform: translateX(-50%) translateY(2px);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--inverse);
+  color: var(--text-inverse);
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms var(--ease-out);
+  z-index: 20;
+}
+
+.requiredDot:hover .requiredTooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Control container */
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 36px;
+  padding: var(--space-1-5) var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .control:hover:not([data-disabled]) {
+    background: var(--surface);
+  }
+}
+
+.control:focus-within {
+  background: var(--bg);
+  box-shadow: var(--focus-ring);
+}
+
+.control[data-invalid] {
+  border-color: var(--danger);
+}
+
+.control[data-invalid]:focus-within {
+  border-color: var(--danger);
+  box-shadow: var(--focus-ring-error);
+}
+
+.control[data-disabled] {
+  background: var(--surface);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input {
+  flex: 1 0 0;
+  min-width: 0;
+  width: 100%;
+  padding: 0 var(--space-0-5);
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  outline: none;
+}
+
+.input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.input::placeholder {
+  color: var(--text-3);
+}
+
+.textareaControl {
+  align-items: stretch;
+  min-height: 92px;
+  padding: var(--space-2);
+}
+
+.textarea {
+  flex: 1 0 0;
+  min-width: 0;
+  width: 100%;
+  min-height: 76px;
+  padding: 0 var(--space-0-5);
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  outline: none;
+  resize: vertical;
+}
+
+.textarea:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.textarea::placeholder {
+  color: var(--text-3);
+}
+
+.textareaNoResize {
+  resize: none;
+}
+
+/* Error / helper message */
+
+.message {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 160ms var(--ease-out),
+    margin-top 160ms var(--ease-out);
+}
+
+.message:not([data-show]) {
+  margin-top: calc(-1 * var(--space-1));
+}
+
+.message[data-show] {
+  grid-template-rows: 1fr;
+}
+
+.errorRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  overflow: hidden;
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  color: var(--danger-text);
+}
+
+.errorIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--danger);
+}
+
+.hint {
+  margin: 0;
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  color: var(--text-2);
+}

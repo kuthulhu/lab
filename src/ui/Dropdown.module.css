@@ -1,0 +1,257 @@
+/* Figma Design System: Dropdown / Combobox (nodes 441:1827 & 364:2052) */
+
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 36px;
+  padding: var(--space-1-5) var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trigger:not(:disabled):not([data-open]):hover {
+    background: var(--surface);
+  }
+}
+
+.trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Dropdown (non-searchable) open state: surface-2 fill, no shadow (Figma 441:1830) */
+.trigger[data-open] {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+/* Combobox (searchable) open state: bg fill + accent focus ring (Figma 364:2053) */
+.trigger[data-searchable][data-open] {
+  background: var(--bg);
+  box-shadow: var(--focus-ring);
+  cursor: text;
+}
+
+.trigger[data-invalid] {
+  border-color: var(--danger);
+}
+
+.trigger[data-invalid]:focus-visible,
+.trigger[data-invalid][data-searchable][data-open] {
+  border-color: var(--danger);
+  box-shadow: var(--focus-ring-error);
+}
+
+.trigger:disabled {
+  background: var(--surface);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.leading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.label {
+  flex: 1 0 0;
+  min-width: 0;
+  padding: 0 var(--space-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.label[data-placeholder] {
+  color: var(--text-3);
+}
+
+.comboboxInput {
+  flex: 1 0 0;
+  min-width: 0;
+  padding: 0 var(--space-2);
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  outline: none;
+}
+
+.comboboxInput:focus,
+.comboboxInput:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.comboboxInput::placeholder {
+  color: var(--text-3);
+}
+
+.caret {
+  flex-shrink: 0;
+  color: var(--text-2);
+}
+
+.caretButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Slot / Menu (Figma 441:1832 & 364:2072) */
+
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  right: 0;
+  z-index: 40;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform-origin: top center;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-2px) scale(0.98);
+  }
+}
+
+.menu[data-placement="top"] {
+  top: auto;
+  bottom: calc(100% + var(--space-1));
+  transform-origin: bottom center;
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(2px) scale(0.98);
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  margin: 0;
+  padding: var(--space-0-5);
+  list-style: none;
+  overflow-y: auto;
+}
+
+.empty {
+  padding: var(--space-3);
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  color: var(--text-3);
+  text-align: center;
+}
+
+/* Option / List Item inside menu (Figma 441:1833 / 439:1598) */
+
+.option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-1-5);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--text);
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .option:hover {
+    background: var(--surface);
+  }
+}
+
+.option:active {
+  background: var(--surface-2);
+}
+
+.option:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.option[data-selected] {
+  color: var(--accent);
+}
+
+.optionLeading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-0-5);
+  flex-shrink: 0;
+}
+
+.optionText {
+  flex: 1 0 0;
+  min-width: 0;
+  padding: 0 var(--space-1-5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.optionTrailing {
+  padding: var(--space-0-5) var(--space-1);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .menu,
+  .option {
+    transition: none;
+  }
+
+  .menu {
+    transform: none;
+
+    @starting-style {
+      opacity: 0;
+      transform: none;
+    }
+  }
+}

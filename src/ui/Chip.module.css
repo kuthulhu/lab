@@ -1,0 +1,105 @@
+/* Figma Design System: Chip (node 451:722) */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+  padding: var(--space-1) var(--space-1-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.label {
+  padding: 0 var(--space-1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip:not(:disabled):not(:has(.dismiss:hover)):hover {
+    background: var(--surface);
+  }
+}
+
+.chip:not(:disabled):not(:has(.dismiss:active)):active {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+.chip[data-selected] {
+  background: var(--accent-subtle);
+  border-color: var(--border-accent-strong);
+  color: var(--accent-text-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip[data-selected]:not(:disabled):not(:has(.dismiss:hover)):hover {
+    background: var(--accent-soft);
+  }
+}
+
+.chip[data-selected]:not(:disabled):not(:has(.dismiss:active)):active {
+  background: var(--accent-soft);
+  box-shadow: none;
+}
+
+.chip:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin: -1px -3px -1px 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip:not(:disabled) .dismiss:hover {
+    background: var(--fill);
+  }
+}
+
+.chip:not(:disabled) .dismiss:active {
+  background: var(--fill-2);
+}
+
+.dismiss:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+  }
+}

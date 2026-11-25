@@ -1,0 +1,307 @@
+.card {
+  position: relative;
+  width: 384px;
+  max-width: 100%;
+  height: 404px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  overflow: clip;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 156px;
+  border-bottom: 1px solid var(--border);
+  overflow: clip;
+}
+
+.bannerCenter {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: calc(50% + 1px);
+  width: 401px;
+  height: 229px;
+  transform: translate(-50%, -50%);
+}
+
+.bannerImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 240ms ease-out;
+}
+
+.bannerImg[data-loaded] {
+  opacity: 1;
+}
+
+.pixelCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.sheet {
+  position: absolute;
+  left: 50%;
+  top: 127px;
+  width: min(312px, calc(100% - 32px));
+  height: 241px;
+  transform: translateX(-50%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-xl);
+}
+
+.avatarWrap {
+  position: absolute;
+  left: 11px;
+  top: -29px;
+  width: 106px;
+  height: 106px;
+}
+
+.avatar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border-inverse);
+  border-radius: var(--radius-full);
+  overflow: clip;
+}
+
+.crystalCanvas {
+  position: absolute;
+  inset: -12px;
+  z-index: 2;
+  width: 130px;
+  height: 130px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.avatarCrop {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 11px);
+  width: 112px;
+  height: 140px;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.avatarImg {
+  position: absolute;
+  left: 0.01%;
+  top: -0.35%;
+  width: 99.97%;
+  height: 100.7%;
+  max-width: none;
+  opacity: 0;
+  transition: opacity 240ms ease-out;
+}
+
+.avatarImg[data-loaded] {
+  opacity: 1;
+}
+
+.avatarShadow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--inset-shadow-sm);
+  pointer-events: none;
+}
+
+.actions {
+  position: absolute;
+  right: 11px;
+  top: 11px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+/* Figma button-secondary */
+.messageBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .messageBtn:hover {
+    background: var(--surface);
+  }
+}
+
+.messageBtn:active {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+.messageBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.messageBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.envelopeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Figma button-primary (--inverse ramp) */
+.followBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 81px;
+  height: 36px;
+  padding: var(--space-1-5) var(--space-4);
+  border: 1px solid var(--border-inverse-strong);
+  border-radius: var(--radius-lg);
+  background: var(--inverse-low);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md);
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .followBtn:hover {
+    background: var(--inverse-medium);
+  }
+}
+
+.followBtn:active {
+  background: var(--inverse-high);
+  box-shadow: none;
+}
+
+.followBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.followBtn[aria-pressed="true"] {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .followBtn[aria-pressed="true"]:hover {
+    background: var(--surface);
+  }
+}
+
+.followBtn[aria-pressed="true"]:active {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+.followBtn[aria-pressed="true"]:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.followBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.identity {
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  top: 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  margin: 0;
+  font: var(--weight-semibold) var(--text-h1) var(--font-heading);
+  letter-spacing: var(--tracking-h1);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.role {
+  margin: 0;
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  color: var(--text-2);
+}
+
+.stats {
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  top: 171px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  margin: 0;
+}
+
+.statTile {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-px);
+  padding: var(--space-1-5) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.statValue {
+  margin: 0;
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.statLabel {
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+  color: var(--text-2);
+}

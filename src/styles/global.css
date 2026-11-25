@@ -1,0 +1,50 @@
+/* Shell-only globals. Experiments rely on tokens.css alone. */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  /* Body/Medium. The type scale itself lives in tokens.css. */
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+}
+
+a {
+  color: inherit;
+}
+
+/* The portfolio's link: a soft underline that's always there and turns accent on hover. */
+.link {
+  text-decoration-line: underline;
+  text-decoration-color: var(--border);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    text-decoration-color: var(--accent);
+  }
+}
+
+kbd {
+  font: var(--weight-regular) var(--text-kbd) var(--font-mono);
+  padding: 3px 5px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-3);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

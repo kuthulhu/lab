@@ -1,0 +1,295 @@
+/* Fills the space beside the sidebar so Preview, Code and Playground get the full width;
+   the header and Notes keep their own 640px reading measure. */
+.stage {
+  padding: 48px 40px 72px;
+}
+
+@media (max-width: 860px) {
+  .stage {
+    padding: 16px max(24px, env(safe-area-inset-right)) 56px max(24px, env(safe-area-inset-left));
+  }
+}
+
+/* Preview fits the window: header, tabs and toolbar keep their height, the canvas takes
+   what's left and scrolls inside. On very short windows the canvas stops at its
+   min-height and the page scrolls a little instead. */
+.stage[data-fit] {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 40px;
+}
+
+@media (max-width: 860px) {
+  .stage[data-fit] {
+    /* The sticky mobile bar sits above the stage in the same scroller. */
+    height: calc(100% - 56px);
+    padding-bottom: 24px;
+  }
+}
+
+.stage[data-fit] .panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Header: the portfolio's name/role block, at the same sizes. */
+
+.header {
+  max-width: 640px;
+}
+
+.category {
+  margin: 0 0 8px;
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  color: var(--text-3);
+}
+
+.title {
+  margin: 0;
+  font: var(--weight-semibold) var(--text-h1) var(--font-heading);
+  letter-spacing: var(--tracking-h1);
+  text-wrap: balance;
+}
+
+/* Always exactly two lines tall (three on phones), so the tabs and canvas below sit at the
+   same height on every experiment and switching between them doesn't shift the page.
+   The clamp is a safety net; descriptions are written to fit (see ExperimentMeta). */
+.description {
+  --lines: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--lines);
+  line-clamp: var(--lines);
+  overflow: hidden;
+  height: calc(var(--lines) * 26px);
+  margin: 8px 0 0;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+@media (max-width: 860px) {
+  .description {
+    --lines: 3;
+  }
+}
+
+.notFoundLink {
+  margin: 24px 0 0;
+}
+
+/* Tabs: text buttons with a gliding underline, as in the portfolio's Tabs.astro. */
+
+.tabsScroller {
+  margin: 20px -24px 0;
+  padding: 0 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabsScroller::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 861px) {
+  .tabsScroller {
+    margin-inline: 0;
+    padding: 0;
+  }
+}
+
+.tabs {
+  position: relative;
+  display: flex;
+  gap: 24px;
+}
+
+.tab {
+  flex-shrink: 0;
+  padding: 8px 0;
+  border: 0;
+  background: none;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: color 150ms;
+}
+
+.tab[aria-selected="true"] {
+  color: var(--text);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tab:hover {
+    color: var(--text);
+  }
+}
+
+.indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: var(--tab-width, 0);
+  height: 2px;
+  border-radius: 999px;
+  background: var(--border);
+  translate: var(--tab-x, 0) 0;
+}
+
+.indicator[data-animate] {
+  transition-property: translate, width;
+  transition-duration: 240ms;
+  transition-timing-function: var(--ease-out);
+}
+
+.panel {
+  margin-top: 12px;
+}
+
+/* Preview */
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.toolButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--text-3);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  cursor: pointer;
+  transition: color 150ms;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .toolButton:hover {
+    color: var(--text);
+  }
+}
+
+.toolButton:active svg {
+  rotate: -45deg;
+  transition: rotate 150ms var(--ease-out);
+}
+
+/* The canvas is the box; the scroller inside it scrolls with 24px padding on all sides. */
+.canvas {
+  --canvas-pad: 24px;
+  position: relative;
+  container-type: inline-size;
+  display: flex;
+  flex: 1;
+  min-height: 320px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at 1px 1px, var(--border-strong) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Auto block margins on the frame center it while it fits and fall back to 0 once it
+   overflows, so tall experiments are never clipped at the top. */
+.scroller {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  padding: var(--canvas-pad);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+/* Experiments are designed at Body/Small; the shell's 16px scale stops here. */
+.frame {
+  container-type: inline-size;
+  container-name: stage;
+  flex-shrink: 0;
+  width: 100%;
+  margin: auto 0;
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+}
+
+.previewContent {
+  animation: previewFadeIn 240ms ease-out;
+}
+
+@keyframes previewFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .previewContent {
+    animation: none;
+  }
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--danger-soft);
+}
+
+.error code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+/* Loading */
+
+.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 160px;
+  opacity: 0;
+  animation: fallbackIn 180ms var(--ease-out) 250ms forwards;
+}
+
+.fallbackSpinner {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--border-strong);
+  border-top-color: var(--text-2);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes fallbackIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}

@@ -1,0 +1,86 @@
+/* Figma Design System: Badge (node 451:661) */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sizeDefault {
+  padding: var(--space-px) var(--space-1);
+  font: var(--weight-medium) var(--text-body-xs) var(--font-sans);
+}
+
+.sizeDefault .label {
+  padding: var(--space-px) var(--space-0-5);
+}
+
+.sizeLarge {
+  padding: var(--space-px) var(--space-1-5);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+}
+
+.sizeLarge .label {
+  padding: var(--space-px) var(--space-1);
+}
+
+/* Solid (neutral inverse) */
+
+.solid {
+  background: var(--inverse-low);
+  color: var(--text-inverse);
+}
+
+/* Secondary / Soft neutral */
+
+.secondary,
+.soft.neutral {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* Outline */
+
+.outline {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Destructive / Soft status & accent */
+
+.destructive,
+.soft.danger {
+  background: var(--danger-soft);
+  color: var(--danger-text);
+}
+
+.soft.accent {
+  background: var(--accent-soft);
+  color: var(--accent-text-strong);
+}
+
+.soft.success {
+  background: var(--success-soft);
+  color: var(--success-strong);
+}
+
+.soft.warning {
+  background: var(--warning-soft);
+  color: var(--warning-strong);
+}
+
+.soft.info {
+  background: var(--info-soft);
+  color: var(--info-strong);
+}

@@ -1,0 +1,133 @@
+/* Figma Design System: Tabs & .tabs-trigger (nodes 524:2195 & 524:1728) */
+
+.list {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-0-5);
+}
+
+.list[data-orientation="vertical"] {
+  flex-direction: column;
+  align-items: stretch;
+  width: 180px;
+}
+
+.list[data-variant="segmented"] {
+  padding: var(--space-1);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+}
+
+.list[data-variant="line"] {
+  gap: 0;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
+  flex: 1 0 0;
+  height: 36px;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.list[data-orientation="vertical"] .trigger {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.trigger[aria-selected="true"] {
+  color: var(--accent);
+}
+
+.trigger:disabled {
+  opacity: 0.36;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  z-index: 1;
+}
+
+/* Segmented appearance */
+
+.list[data-variant="segmented"] .trigger[aria-selected="true"] {
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .list[data-variant="segmented"] .trigger:not(:disabled):not([aria-selected="true"]):hover {
+    background: var(--surface-2);
+  }
+
+  .list[data-variant="segmented"] .trigger:not(:disabled)[aria-selected="true"]:hover {
+    background: var(--surface);
+  }
+}
+
+.list[data-variant="segmented"][data-orientation="vertical"] .trigger:not([aria-selected="true"]) {
+  border-radius: var(--radius-md);
+}
+
+/* Line appearance */
+
+.list[data-variant="line"] .trigger {
+  border-radius: 0;
+}
+
+.list[data-variant="line"][data-orientation="horizontal"] .trigger {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.list[data-variant="line"][data-orientation="horizontal"] .trigger[aria-selected="true"] {
+  background: transparent;
+  border-bottom: 2px solid var(--accent);
+}
+
+.list[data-variant="line"][data-orientation="vertical"] .trigger {
+  background: transparent;
+  border-left: 1px solid var(--border-strong);
+}
+
+.list[data-variant="line"][data-orientation="vertical"] .trigger[aria-selected="true"] {
+  border-left: 2px solid var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .list[data-variant="line"] .trigger:not(:disabled):hover {
+    background: var(--surface-2);
+  }
+}
+
+.list[data-variant="line"] .trigger:not([aria-selected="true"]):focus-visible {
+  border-radius: var(--radius-lg);
+  border-color: transparent;
+}
+
+.list[data-variant="line"] .trigger[aria-selected="true"]:focus-visible {
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger {
+    transition: none;
+  }
+}

@@ -1,0 +1,380 @@
+/*
+ * Design tokens shared by the shell and every experiment.
+ * This file is also injected into the Playground sandbox, so it must stay standalone.
+ *
+ * Source of truth: the "Labs" Figma design system
+ * (figma.com/design/oggZUVC4YuShzMLOcdlHDu, collections "CSS Theme" + ".CSS Primitives",
+ * plus its text and effect styles). Names follow the Figma variables' code syntax where it
+ * exists (--bg, --surface, --surface-2, --surface-3, --inverse); the rest are named here.
+ *
+ * How the Figma components use them:
+ *   - Raised things (cards, dialogs, inputs, secondary buttons) sit on --bg with a --border
+ *     stroke and a shadow. --surface → --surface-4 are hover, press and fill layers.
+ *   - --text-2 is secondary copy (labels, descriptions); --text-3 is placeholders and counts.
+ *   - Primary buttons use the --inverse ramp: default → hover → press = low → medium → high.
+ *   - Accent and danger buttons go default → hover → press = base → -hover → -strong.
+ *
+ * Neutral primitives (zinc): 0 #fafafa · 100 #f4f4f5 · 200 #e4e4e7 · 300 #d4d4d8 · 400 #a1a1aa
+ * 500 #71717a · 600 #52525b · 700 #3f3f46 · 800 #27272a · 900 #18181b · 950 #0e0e0f
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg: #fafafa;
+  --surface: #f4f4f5;
+  --surface-2: #e4e4e7;
+  --surface-3: #d4d4d8;
+  --surface-4: #a1a1aa;
+
+  /* Translucent fills (neutral 500), for things that sit on any surface */
+  --fill: rgb(113 113 122 / 0.12);
+  --fill-2: rgb(113 113 122 / 0.18);
+  --fill-3: rgb(113 113 122 / 0.32);
+
+  /* Inverse surfaces: dark-on-light buttons, tooltips, chips */
+  --inverse: #0e0e0f;
+  --inverse-low: #18181b;
+  --inverse-medium: #27272a;
+  --inverse-high: #3f3f46;
+  --inverse-highest: #52525b;
+
+  /* Borders */
+  --border: rgb(14 14 15 / 0.06);
+  --border-strong: rgb(14 14 15 / 0.12);
+  --border-inverse: rgb(250 250 250 / 0.24);
+  --border-inverse-strong: rgb(250 250 250 / 0.4);
+  --border-accent: #fec5e7;
+  --border-accent-strong: #e300ae;
+
+  /* Text */
+  --text: #0e0e0f;
+  --text-2: #71717a;
+  --text-3: #a1a1aa;
+  --text-inverse: #fafafa;
+
+  /* Accent (magenta) */
+  --accent: #e300ae;
+  --accent-hover: #bc008f;
+  --accent-strong: #960072;
+  --accent-soft: #fec5e7;
+  --accent-subtle: #fff8fc;
+  --accent-contrast: #fafafa;
+  --accent-text-soft: #f26bc4;
+  --accent-text-strong: #6f0054;
+
+  /* Status: -soft is the alert/badge background, -strong its icon, -text-strong its title */
+  --success: #04a74d;
+  --success-soft: #e6f7e9;
+  --success-strong: #005e28;
+  --success-text: #04a74d;
+  --success-text-strong: #005e28;
+
+  --info: #2563eb;
+  --info-soft: #dbeafe;
+  --info-strong: #1e40af;
+  --info-text: #2563eb;
+  --info-text-strong: #1e40af;
+
+  --warning: #bb7300;
+  --warning-soft: #fbefe3;
+  --warning-strong: #6a4000;
+  --warning-text: #bb7300;
+  --warning-text-strong: #6a4000;
+
+  --danger: #f24244;
+  --danger-hover: #c83436;
+  --danger-strong: #a02728;
+  --danger-soft: #ffe9e6;
+  --danger-text: #c83436;
+  --danger-text-strong: #77191b;
+
+  /* Focus: a 1px accent ring with a soft 4px halo (Figma effect styles focus/ring, focus/ring-error) */
+  --focus-ring: 0 0 0 1px var(--accent), 0 0 0 4px color-mix(in srgb, var(--accent) 24%, transparent);
+  --focus-ring-error: 0 0 0 1px var(--danger), 0 0 0 4px color-mix(in srgb, var(--danger) 24%, transparent);
+
+  /* Shadows (Figma box-shadow/*). The same in both themes. */
+  --shadow-2xs: 0 1px 0 rgb(0 0 0 / 0.05);
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --inset-shadow-2xs: inset 0 1px 0 rgb(0 0 0 / 0.05);
+  --inset-shadow-xs: inset 0 1px 1px rgb(0 0 0 / 0.05);
+  --inset-shadow-sm: inset 0 2px 4px rgb(0 0 0 / 0.05);
+
+  /* Blur (Figma blur/* and backdrop-blur/*) */
+  --blur-xs: 4px;
+  --blur-sm: 8px;
+  --blur-md: 12px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
+  --blur-2xl: 40px;
+  --blur-3xl: 64px;
+
+  /* Radius (Figma border/radius/rounded-*) */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-4xl: 32px;
+  --radius-full: 9999px;
+
+  /* Spacing (Figma spacing/padding/p-*, a 4px grid; p-0,5 → --space-0-5) */
+  --space-px: 1px;
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-3-5: 14px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Type (Figma text styles). Size/line-height pairs for the `font` shorthand:
+     font: var(--weight-semibold) var(--text-h3) var(--font-heading); letter-spacing: var(--tracking-h3); */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Inter Tight", var(--font-sans);
+  --font-mono: "Red Hat Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  --text-h1: 32px / 40px; /* Heading/H1: semibold, -2% */
+  --text-h3: 20px / 28px; /* Heading/H3: semibold, -1% */
+  --text-h4: 16px / 24px; /* Heading/H4: semibold, -0.5% */
+  --text-body-lg: 18px / 28px; /* Body/Large: regular */
+  --text-body-md: 16px / 24px; /* Body/Medium: regular */
+  --text-body-sm: 14px / 20px; /* Body/Small: medium */
+  --text-body-xs: 12px / 18px; /* Body/Extra Small: medium */
+  --text-kbd: 11px / 11px; /* Utility/Keyboard: mono regular */
+
+  --tracking-h1: -0.02em;
+  --tracking-h3: -0.01em;
+  --tracking-h4: -0.005em;
+
+  /* Motion (not in Figma yet) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Dark: Figma's "Dark" mode of the CSS Theme collection. Restated below for an explicit data-theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #0e0e0f;
+    --surface: #18181b;
+    --surface-2: #27272a;
+    --surface-3: #3f3f46;
+    --surface-4: #52525b;
+
+    --inverse: #fafafa;
+    --inverse-low: #f4f4f5;
+    --inverse-medium: #e4e4e7;
+    --inverse-high: #d4d4d8;
+    --inverse-highest: #a1a1aa;
+
+    --border: rgb(250 250 250 / 0.06);
+    --border-strong: rgb(250 250 250 / 0.12);
+    --border-inverse: rgb(14 14 15 / 0.24);
+    --border-inverse-strong: rgb(14 14 15 / 0.4);
+    --border-accent: #6f0054;
+    --border-accent-strong: #f26bc4;
+
+    --text: #fafafa;
+    --text-2: #a1a1aa;
+    --text-3: #71717a;
+    --text-inverse: #0e0e0f;
+
+    --accent: #f26bc4;
+    --accent-hover: #fa9dd7;
+    --accent-strong: #fec5e7;
+    --accent-soft: #960072;
+    --accent-subtle: #480035;
+    --accent-contrast: #0e0e0f;
+    --accent-text-soft: #e300ae;
+    --accent-text-strong: #fec5e7;
+
+    --success: #14cc61;
+    --success-soft: #005e28;
+    --success-strong: #e6f7e9;
+    --success-text: #c9f0d0;
+    --success-text-strong: #003815;
+
+    --info: #3b82f6;
+    --info-soft: #1e40af;
+    --info-strong: #dbeafe;
+    --info-text: #bfdbfe;
+    --info-text-strong: #1e3a8a;
+
+    --warning: #e48e02;
+    --warning-soft: #6a4000;
+    --warning-strong: #fbefe3;
+    --warning-text: #f8ddc2;
+    --warning-text-strong: #412500;
+
+    --danger: #c83436;
+    --danger-hover: #f24244;
+    --danger-strong: #fc7f77;
+    --danger-soft: #77191b;
+    --danger-text: #ffcec9;
+    --danger-text-strong: #4d0b0d;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0e0e0f;
+  --surface: #18181b;
+  --surface-2: #27272a;
+  --surface-3: #3f3f46;
+  --surface-4: #52525b;
+
+  --inverse: #fafafa;
+  --inverse-low: #f4f4f5;
+  --inverse-medium: #e4e4e7;
+  --inverse-high: #d4d4d8;
+  --inverse-highest: #a1a1aa;
+
+  --border: rgb(250 250 250 / 0.06);
+  --border-strong: rgb(250 250 250 / 0.12);
+  --border-inverse: rgb(14 14 15 / 0.24);
+  --border-inverse-strong: rgb(14 14 15 / 0.4);
+  --border-accent: #6f0054;
+  --border-accent-strong: #f26bc4;
+
+  --text: #fafafa;
+  --text-2: #a1a1aa;
+  --text-3: #71717a;
+  --text-inverse: #0e0e0f;
+
+  --accent: #f26bc4;
+  --accent-hover: #fa9dd7;
+  --accent-strong: #fec5e7;
+  --accent-soft: #960072;
+  --accent-subtle: #480035;
+  --accent-contrast: #0e0e0f;
+  --accent-text-soft: #e300ae;
+  --accent-text-strong: #fec5e7;
+
+  --success: #14cc61;
+  --success-soft: #005e28;
+  --success-strong: #e6f7e9;
+  --success-text: #c9f0d0;
+  --success-text-strong: #003815;
+
+  --info: #3b82f6;
+  --info-soft: #1e40af;
+  --info-strong: #dbeafe;
+  --info-text: #bfdbfe;
+  --info-text-strong: #1e3a8a;
+
+  --warning: #e48e02;
+  --warning-soft: #6a4000;
+  --warning-strong: #fbefe3;
+  --warning-text: #f8ddc2;
+  --warning-text-strong: #412500;
+
+  --danger: #c83436;
+  --danger-hover: #f24244;
+  --danger-strong: #fc7f77;
+  --danger-soft: #77191b;
+  --danger-text: #ffcec9;
+  --danger-text-strong: #4d0b0d;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Experiments are designed at Body/Small; the shell sets its own 16px scale in global.css. */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+:is(h1, h2, h3, h4) {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-semibold);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* The design system's focus ring: the outline draws the 1px accent ring and follows any radius,
+   the box-shadow adds the halo. A component that sets its own box-shadow keeps the outline. */
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+/* Rounds the ring around inline links; :where() keeps it from overriding any element's own radius. */
+:where(a:focus-visible) {
+  border-radius: var(--radius-sm);
+}
+
+/* Thin, theme-aware custom scrollbar shared by the shell and every experiment.
+   Gated with @supports so Chromium keeps ::-webkit-scrollbar instead of falling back to scrollbar-width. */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-full);
+  background: var(--fill-2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fill-3);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--fill-2) transparent;
+  }
+}

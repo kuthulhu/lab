@@ -1,0 +1,359 @@
+/* Figma Design System: Form Controls — Radio, Checkbox, Toggle, ToggleGroup
+   (nodes 363:695, 495:1383, 497:2650, 500:3442) */
+
+.hiddenInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.iconAccent {
+  color: var(--accent);
+}
+
+.iconMuted {
+  color: var(--text-3);
+}
+
+.iconDanger {
+  color: var(--danger);
+}
+
+.controlIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Plain (borderless) Radio & Checkbox (Figma Type=Default) */
+
+.plainRow {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.plainRow[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.plainControl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .plainRow:not([data-disabled]):hover .plainControl {
+    background: var(--fill);
+  }
+}
+
+.plainRow:not([data-disabled]):active .plainControl {
+  background: var(--fill-2);
+}
+
+.plainRow:has(:focus-visible) .plainControl {
+  box-shadow: var(--focus-ring);
+}
+
+.plainRow[data-error]:not([data-checked]) .plainControl {
+  box-shadow: var(--focus-ring-error);
+}
+
+.plainRow[data-error]:not([data-checked]) .optionTitle {
+  color: var(--danger-text);
+}
+
+/* Radio & Checkbox row (Figma Type=List Left / List Right) */
+
+.optionRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2-5);
+  padding: var(--space-3-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .optionRow:not([data-disabled]):hover {
+    background: var(--surface);
+  }
+}
+
+.optionRow:not([data-disabled]):active {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+.optionRow[data-checked] {
+  border-color: var(--border-accent-strong);
+}
+
+.optionRow:has(:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+
+.optionRow[data-error]:not([data-checked]) {
+  box-shadow: var(--focus-ring-error);
+}
+
+.optionRow[data-error]:not([data-checked]) .optionTitle {
+  color: var(--danger-text);
+}
+
+.optionRow[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.optionCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.optionTitle {
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  color: var(--text);
+}
+
+.optionDesc {
+  font: var(--weight-medium) var(--text-body-sm) var(--font-sans);
+  color: var(--text-2);
+}
+
+/* Radio Card (Figma Type=Card) */
+
+.radioCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3-5);
+  padding: var(--space-3-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .radioCard:not([data-disabled]):hover {
+    background: var(--surface);
+  }
+}
+
+.radioCard:not([data-disabled]):active {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+.radioCard[data-checked] {
+  border-color: var(--border-accent-strong);
+}
+
+.radioCard:has(:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+
+.radioCard[data-error]:not([data-checked]) {
+  box-shadow: var(--focus-ring-error);
+}
+
+.radioCard[data-error]:not([data-checked]) .optionTitle {
+  color: var(--danger-text);
+}
+
+.radioCard[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cardIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--text);
+}
+
+.radioCardDot {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+}
+
+/* Toggle Switch (Figma 497:2650) */
+
+.toggleRow {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-3-5);
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggleRow[data-position="right"] {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.toggleRow[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggleRow[data-error] .optionTitle {
+  color: var(--danger-text);
+}
+
+.toggleFrame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggleTrack {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 36px;
+  height: 20px;
+  padding: 2px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--surface-3);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out), box-shadow 150ms ease;
+}
+
+.toggleTrack[data-checked] {
+  background: var(--accent);
+}
+
+.toggleTrack:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.toggleTrack[data-error]:not([data-checked]) {
+  box-shadow: var(--focus-ring-error);
+}
+
+.toggleThumb {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background: var(--bg);
+  box-shadow: var(--shadow-xs);
+  transition:
+    transform 160ms var(--ease-out),
+    box-shadow 150ms ease;
+}
+
+.toggleTrack[data-checked] .toggleThumb {
+  transform: translateX(16px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .toggleRow:not([data-disabled]):hover .toggleThumb {
+    box-shadow: var(--shadow-xs), 0 0 0 6px var(--fill);
+  }
+}
+
+.toggleRow:not([data-disabled]):active .toggleThumb {
+  box-shadow: var(--shadow-xs), 0 0 0 6px var(--fill-2);
+}
+
+/* Toggle Group (Figma 500:3442) */
+
+.toggleGroup {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.toggleGroupItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-1-5) var(--space-2);
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font: var(--weight-regular) var(--text-body-md) var(--font-sans);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.toggleGroupItem:last-child {
+  border-right: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .toggleGroupItem:not(:disabled):hover {
+    background: var(--surface);
+  }
+}
+
+.toggleGroupItem:not(:disabled):active,
+.toggleGroupItem[data-active] {
+  background: var(--surface-2);
+}
+
+.toggleGroupItem:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plainControl,
+  .optionRow,
+  .radioCard,
+  .toggleTrack,
+  .toggleThumb,
+  .toggleGroupItem {
+    transition: none;
+  }
+}
