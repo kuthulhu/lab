@@ -26,15 +26,6 @@
   text-wrap: pretty;
 }
 
-.back {
-  margin: 24px 0 0;
-}
-
-.arrow {
-  margin-left: 2px;
-  vertical-align: -0.05em;
-}
-
 .groups {
   display: flex;
   flex-direction: column;
@@ -63,7 +54,16 @@
   list-style: none;
 }
 
-/* The whole row is the link's hit area; hovering it turns the title accent, like a Work row. */
+.componentGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The whole row is the link's hit area; plain text with an underline on hover, like the sidebar. */
 .item {
   position: relative;
 }
@@ -72,12 +72,11 @@
   margin: 0;
   font: var(--weight-semibold) var(--text-h4) var(--font-heading);
   letter-spacing: var(--tracking-h4);
-  transition: color 150ms ease-out;
 }
 
 .itemLink {
   text-decoration-line: underline;
-  text-decoration-color: var(--border);
+  text-decoration-color: transparent;
   text-decoration-thickness: 2px;
   text-underline-offset: 5px;
   transition: text-decoration-color 150ms ease;
@@ -90,16 +89,9 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .item:hover .itemTitle {
-    color: var(--accent);
-  }
   .item:hover .itemLink {
-    text-decoration-color: var(--accent);
+    text-decoration-color: var(--border-strong);
   }
-}
-
-.item:focus-within .itemTitle {
-  color: var(--accent);
 }
 
 .itemDescription {
@@ -111,7 +103,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .itemTitle {
+  .itemLink {
     transition: none;
   }
 }
