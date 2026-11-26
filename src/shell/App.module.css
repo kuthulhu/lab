@@ -8,6 +8,15 @@
   .layout {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .main {
+    scrollbar-gutter: auto;
+  }
+
+  .routeView {
+    height: auto;
+    min-height: calc(100% - 56px - env(safe-area-inset-top, 0px));
+  }
 }
 
 /* The main column scrolls like a document, as the portfolio does. */
@@ -25,8 +34,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 56px;
-  padding: env(safe-area-inset-top) 16px 0 12px;
+  height: calc(56px + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) 16px 0 12px;
   background: color-mix(in oklab, var(--bg) 85%, transparent);
   backdrop-filter: blur(8px);
 }

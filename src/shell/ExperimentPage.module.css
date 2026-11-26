@@ -1,18 +1,27 @@
 /* Fills the space beside the sidebar so Preview, Code and Playground get the full width;
    the header and Notes keep their own 640px reading measure. */
 .stage {
-  padding: 48px 40px 72px;
+  --stage-px: 40px;
+  padding: 48px var(--stage-px) 72px;
 }
 
 @media (max-width: 860px) {
   .stage {
-    padding: 16px max(24px, env(safe-area-inset-right)) 56px max(24px, env(safe-area-inset-left));
+    --stage-px: 16px;
+    padding: 12px max(var(--stage-px), env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom))
+      max(var(--stage-px), env(safe-area-inset-left));
   }
 }
 
-/* Preview fits the window: header, tabs and toolbar keep their height, the canvas takes
-   what's left and scrolls inside. On very short windows the canvas stops at its
-   min-height and the page scrolls a little instead. */
+@media (max-width: 480px) {
+  .stage {
+    --stage-px: 12px;
+  }
+}
+
+/* Preview fits the window on desktop: header, tabs and toolbar keep their height, the canvas
+   takes what's left and scrolls inside. On mobile the page scrolls naturally so the canvas
+   can grow to its content instead of trapping experiments inside a short scroll box. */
 .stage[data-fit] {
   display: flex;
   flex-direction: column;
@@ -22,9 +31,9 @@
 
 @media (max-width: 860px) {
   .stage[data-fit] {
-    /* The sticky mobile bar sits above the stage in the same scroller. */
-    height: calc(100% - 56px);
-    padding-bottom: 24px;
+    height: auto;
+    min-height: calc(100dvh - 56px - env(safe-area-inset-top, 0px));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
   }
 }
 
@@ -73,6 +82,7 @@
 @media (max-width: 860px) {
   .description {
     --lines: 3;
+    height: auto;
   }
 }
 
@@ -83,8 +93,8 @@
 /* Tabs: text buttons with a gliding underline, as in the portfolio's Tabs.astro. */
 
 .tabsScroller {
-  margin: 20px -24px 0;
-  padding: 0 24px;
+  margin: 12px calc(var(--stage-px) * -1) 0;
+  padding: 0 var(--stage-px);
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -95,7 +105,7 @@
 
 @media (min-width: 861px) {
   .tabsScroller {
-    margin-inline: 0;
+    margin: 20px 0 0;
     padding: 0;
   }
 }
@@ -147,6 +157,12 @@
   margin-top: 12px;
 }
 
+@media (max-width: 860px) {
+  .panel {
+    margin-top: 8px;
+  }
+}
+
 /* Preview */
 
 .preview {
@@ -161,6 +177,12 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 12px;
+}
+
+@media (max-width: 860px) {
+  .toolbar {
+    margin-bottom: 8px;
+  }
 }
 
 .toolButton {
@@ -212,6 +234,26 @@
   padding: var(--canvas-pad);
   overflow: auto;
   overscroll-behavior: contain;
+}
+
+@media (max-width: 860px) {
+  .canvas {
+    --canvas-pad: 16px;
+    min-height: clamp(460px, 68dvh, 640px);
+    border-radius: var(--radius-xl);
+  }
+
+  .scroller {
+    overflow-x: auto;
+    overflow-y: visible;
+    overscroll-behavior: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .canvas {
+    --canvas-pad: 12px;
+  }
 }
 
 /* Experiments are designed at Body/Small; the shell's 16px scale stops here. */
